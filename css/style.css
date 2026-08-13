@@ -244,9 +244,7 @@ p {
 }
 
 .checkbox-unico input:checked ~ .marcador {
-
     box-shadow: 0 0 10px hsla(130, 98%, 19%, 0.3);
-
 }
 
 .marcador:after {
