@@ -39,6 +39,7 @@ body {
     border: 2px solid #0d5519;
     border-radius: 6px;
     box-shadow: 0px 3px 25px #99c2a0;
+    padding-bottom: 40px;
 }
 
 p {
@@ -143,12 +144,13 @@ p {
     margin-top: 10%;
 }
 
-#desafio {
+.desafio {
     font-size: 190px;
     font-weight: 600;
     color: #1c5c27;
     margin: auto;
     font-family:  "Orbitron", sans-serif;
+    text-shadow: 0px 6px 15px #99c2a0;
 }
 
 #curso {
@@ -156,4 +158,111 @@ p {
     font-weight: 400;
     margin: auto;
     font-family:  "Orbitron", sans-serif;
+    overflow-wrap: break-word;
+    text-shadow: 0px 6px 15px hsla(0, 0%, 0%, 0.6);
+}
+
+#desafioMenor {
+    font-size: 90px;
+}
+
+#meio {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+}
+
+#tituloDesafios {
+    text-align: center;
+}
+
+.desafios {
+    display: flex;
+    width: 70%;
+    height: 150px;
+    background-color: hsla(130, 98%, 19%, 0.3);
+    border: 2px solid #1c5c27;
+    border-radius: 20px;
+    box-shadow: 0px 3px 25px #99c2a0;
+}
+
+.textoDesafio {
+    width: 85%;
+    align-self: center;
+    justify-self: center;
+    margin-inline: 2.5%;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+}
+
+#gapDesafio {
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.checkbox {
+    display: flex;
+    width: 10%;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.checkbox-unico {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.checkbox-unico input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.marcador {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FFFFFF;
+    border: 2px solid #555555;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.checkbox-unico:hover input ~ .marcador {
+    border-color: #888888;
+}
+
+.checkbox-unico input:checked ~ .marcador {
+
+    box-shadow: 0 0 10px hsla(130, 98%, 19%, 0.3);
+
+}
+
+.marcador:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 13px;
+    bottom: 10px;
+    width: 18px;
+    height: 34px;
+    border: solid #1c5c27;;
+    border-width: 0 4px 4px 0;
+    transform: rotate(45deg);
+    
+}
+
+.checkbox-unico input:checked ~ .marcador:after {
+    display: block;
 }
