@@ -1,54 +1,99 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/style.css" />
-  </head>
-  <body>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+</head>
+
+<body>
     <div id="header">
-      <img id="logo" src="/image/Logo-IFSP.png" alt="" />
+        <img id="logo" src="/image/Logo-IFSP.png" alt="" />
     </div>
     <div id="comeco">
-      <div id="instrucao">
-        <h3>Instruções para Jogar</h3>
-        <h5>Para Andar</h5>
-        <div class="direcao">
-          <div>
-            <p>PARAFRENTE(PF)</p>
-            <p>Exemplo: pf 100</p>
-          </div>
-          <div>
-            <p>PARATRÁS(PT)</p>
-            <p>Exemplo: pt 100</p>
-          </div>
+        <div id="boxTitulo">
+            <div id="titulo">
+                <p id="desafio">Desafio</p>
+                <p id="curso">Análise e Desenvolvimento de Sistemas</p>
+            </div>
         </div>
-        <p>
-          100 é o número de passos, ele define a distância que você vai andar
-        </p>
-        <h5>Para virar</h5>
-        <div class="direcao">
-          <div>
-            <p>PARADIREITA(PD)</p>
-            <p>Exemplo: pd 90</p>
-          </div>
-          <div>
-            <p>PARAESQUERDA(PE)</p>
-            <p>Exemplo: pe 90</p>
-          </div>
+        <div id="instrucao">
+            <h1>Instruções para Jogar</h1>
+            <div class="bloco">
+                <h2>Para Andar</h2>
+                <div class="direcao">
+                    <div class="boxDiv">
+                        <p>Para Frente(PF)</p>
+                        <p>Exemplo: pf 100</p>
+                    </div>
+                    <div class="boxDiv">
+                        <p>Para Trás(PT)</p>
+                        <p>Exemplo: pt 100</p>
+                    </div>
+                </div>
+                <div class="explicacao">
+                    <p>
+                        100 é o número de passos, ele define a distância que você vai andar
+                    </p>
+                </div>
+            </div>
+            <div class="bloco">
+                <h2>Para virar</h2>
+                <div class="direcao">
+                    <div class="boxDiv">
+                        <p>Para Direita(PD)</p>
+                        <p>Exemplo: pd 90</p>
+                    </div>
+                    <div class="boxDiv">
+                        <p>Para Esquerda(PE)</p>
+                        <p>Exemplo: pe 90</p>
+                    </div>
+                </div>
+                <div class="explicacao">
+                    <p>
+                        90 é o número de graus, se for 90 ele vira para o lado, se for 180 ele
+                        vira para trás e se for 360 ele dá uma volta
+                    </p>
+                </div>
+            </div>
+            <div class="bloco">
+                <h2>Comandos Adicionais</h2>
+                <div class="direcao">
+                    <div class="alinhar">
+                        <div class="boxDiv2">
+                            <p>Use Nada(UN)</p>
+                        </div>
+                        <div class="explicacao2">
+                            <p>Serve para sua tartaruga parar de escrever a linha</p>
+                        </div>
+                    </div>
+                    <div class="alinhar">
+                        <div class="boxDiv2">
+                            <p>Use Lápis(UL)</p>
+                        </div>
+                        <div class="explicacao2">
+                            <p>Serve para sua tartaruga voltar a escrever a linha</p>
+                        </div>
+                    </div>
+                    <div class="alinhar">
+                        <div class="boxDiv2">
+                            <p>TAT</p>
+                        </div>
+                        <div class="explicacao2">
+                            <p>Limpa a tela inteira</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <p>
-          90 é o número de graus, se for 90 ele vira para o lado, se for 180 ele
-          vira para trás e se for 360 ele dá uma volta
-        </p>
-        <h5>Comandos Adicionais</h5>
-        <p>USENADA(UN)</p>
-        <p>Serve para sua tartaruga para de escrever a linha</p>
-        <p>USELÁPIS(UL)</p>
-        <p>Serve para sua tartaruga voltar a escrever a linha</p>
-        <p>TAT</p>
-        <p>Limpa a tela inteira</p>
-      </div>
+
     </div>
-  </body>
+
+
+</body>
+
 </html>
