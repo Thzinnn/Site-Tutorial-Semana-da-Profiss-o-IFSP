@@ -184,11 +184,31 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Ranking Section -->
+        <div id="ranking-section">
+            <div id="points-display">
+                <span class="points-label">Pontos:</span>
+                <span id="points-value">0</span>
+                <span class="points-max">/ 500</span>
+            </div>
+            <div id="badges-display">
+                <h3>Badges Conquistadas</h3>
+                <div id="earned-badges" class="badges-list"></div>
+            </div>
+        </div>
+
         <div id="resetDiv">
             <button id="reset" onclick="clearProgress()">Limpar o Progresso</button>
         </div>
     </div>
+    <script src="js/ranking-system.js"></script>
     <script src="js/save-progress.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        window.rankingSystem.updateRankingDisplay();
+      });
+    </script>
 </body>
 
 </html>

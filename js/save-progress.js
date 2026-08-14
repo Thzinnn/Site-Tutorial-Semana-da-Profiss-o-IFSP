@@ -148,6 +148,13 @@
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
       showSavedBadge();
+
+      // Atualizar ranking
+      const completedCount = payload.states.filter(state => state).length;
+      if (window.rankingSystem) {
+        window.rankingSystem.updatePoints(completedCount);
+        window.rankingSystem.updateRankingDisplay();
+      }
     } catch (error) {
       console.warn('save-progress: não foi possível salvar no localStorage', error);
     }
@@ -175,6 +182,11 @@
     try {
       localStorage.removeItem(STORAGE_KEY);
       showResetBadge();
+
+      // Resetar ranking
+      if (window.rankingSystem) {
+        window.rankingSystem.resetRanking();
+      }
     } catch (error) {
       console.warn('save-progress: erro ao remover progresso', error);
     }

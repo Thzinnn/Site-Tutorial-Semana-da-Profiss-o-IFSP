@@ -272,7 +272,7 @@ h2 {
     align-items: center;
 }
 
-.boxDiv, .boxDiv2, #reset {
+.boxDiv, .boxDiv2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -294,13 +294,7 @@ h2 {
     height: auto;
 }
 
-#reset {
-    color: white;
-    cursor: pointer;
-}
-
-
-.boxDiv:hover, .boxDiv2:hover, #reset:hover {
+.boxDiv:hover, .boxDiv2:hover {
     background: rgba(16, 185, 129, 0.16);
     border-color: var(--primary-green-hover);
     box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
@@ -387,6 +381,7 @@ p {
     gap: 20px;
     align-items: center;
     width: 100%;
+    margin-top: 50px;
 }
 
 .desafios {
@@ -588,5 +583,211 @@ p {
         width: 8px;
         height: 16px;
         border-width: 0 3px 3px 0;
+    }
+}
+
+/* Ranking Section Styles */
+#ranking-section {
+    margin-top: 50px;
+    padding: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--shadow-card);
+}
+
+#points-display {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-green);
+}
+
+.points-label {
+    color: var(--text-primary);
+}
+
+#points-value {
+    color: var(--primary-green);
+    font-size: 2.5rem;
+}
+
+.points-max {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+#badges-display h3 {
+    color: var(--text-primary);
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.badges-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+}
+
+.badge-item-earned {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid var(--border-color-hover);
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.badge-item-earned:hover {
+    background: rgba(16, 185, 129, 0.2);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    transform: translateY(-4px);
+}
+
+.badge-item-earned .badge-icon {
+    font-size: 2.5rem;
+}
+
+.badge-item-earned .badge-name {
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.no-badges {
+    color: var(--text-muted);
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+}
+
+/* Badge Notification */
+.badge-notification {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color-hover);
+    border-radius: 12px;
+    padding: 16px;
+    max-width: 350px;
+    backdrop-filter: var(--glass-backdrop);
+    box-shadow: var(--shadow-glow);
+    opacity: 0;
+    transform: translateX(-400px);
+    transition: all 0.3s ease;
+    z-index: 99998;
+}
+
+.badge-notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.badge-notification-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.badge-notification .badge-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.badge-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.badge-text strong {
+    color: var(--primary-green);
+    font-size: 1rem;
+}
+
+.badge-text p {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.badge-reward {
+    color: var(--primary-green);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+/* Reset Ranking Button */
+#reset {
+    background: rgba(239, 68, 68, 0.95);
+    color: #fff;
+    border: 1px solid var(--accent-red);
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 12px;
+}
+
+#reset:hover {
+    background: rgba(239, 68, 68, 1);
+    box-shadow: 0 0 16px rgba(239, 68, 68, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Responsive for mobile */
+@media (max-width: 900px) {
+    #ranking-section {
+        margin: 16px 0;
+        padding: 16px;
+    }
+
+    #points-display {
+        font-size: 1.2rem;
+        margin-bottom: 16px;
+    }
+
+    #points-value {
+        font-size: 2rem;
+    }
+
+    .badges-list {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 10px;
+    }
+
+    .badge-item-earned {
+        padding: 10px 12px;
+    }
+
+    .badge-item-earned .badge-icon {
+        font-size: 2rem;
+    }
+
+    #reset-ranking {
+        margin-left: 8px;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .badge-notification {
+        max-width: 280px;
+        left: 10px;
+        right: 10px;
     }
 }
