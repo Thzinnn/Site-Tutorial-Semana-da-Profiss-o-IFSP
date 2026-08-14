@@ -272,7 +272,7 @@ h2 {
     align-items: center;
 }
 
-.boxDiv, .boxDiv2 {
+.boxDiv, .boxDiv2, #reset {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -285,7 +285,22 @@ h2 {
     transition: all 0.25s ease;
 }
 
-.boxDiv:hover, .boxDiv2:hover {
+#resetDiv {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    margin-top: 50px;
+    width: auto;
+    height: auto;
+}
+
+#reset {
+    color: white;
+    cursor: pointer;
+}
+
+
+.boxDiv:hover, .boxDiv2:hover, #reset:hover {
     background: rgba(16, 185, 129, 0.16);
     border-color: var(--primary-green-hover);
     box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
