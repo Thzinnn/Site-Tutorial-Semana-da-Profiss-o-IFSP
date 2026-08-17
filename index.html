@@ -119,69 +119,37 @@
             <p class="desafio" id="desafioMenor">Desafios de Programação</p>
         </div>
         <div id="gapDesafio">
-            <div class="desafios">
-                <p class="textoDesafio">Faça a tartaruga desenhar um quadrado.<br>
+            <div id="telaEntrada" class="challenge-shell">
+                <button id="btnPlay" class="btn-desafio" type="button">▶ Play</button>
+            </div>
 
-                    Cada lado deve ter 100 passos.
-                    A tartaruga deve terminar no ponto onde começou.</p>
-                <div class="checkbox">
-                    <label class="checkbox-unico">
-                        <input type="checkbox">
-                        <span class="marcador"></span>
-                    </label>
+            <div id="desafioAtual" class="challenge-shell hidden">
+                <div id="indiceDesafio">Desafio 1 de 5</div>
+
+                <div class="challenge-card">
+                    <p id="desafioTexto" class="textoDesafio"></p>
+                    <div class="checkbox">
+                        <label class="checkbox-unico">
+                            <input id="checkboxDesafio" type="checkbox">
+                            <span class="marcador"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="painelUltimoTempo" class="resultado-panel hidden">
+                    <span class="resultado-label">Último tempo</span>
+                    <strong id="ultimoTempoTexto">00:00.0</strong>
+                </div>
+
+                <div id="cronometro" class="hidden">00:00.0</div>
+
+                <div class="challenge-actions">
+                    <button id="btnProximo" class="btn-desafio hidden" type="button">Próximo</button>
                 </div>
             </div>
-            <div class="desafios">
-                <p class="textoDesafio">Faça a tartaruga desenhar uma escada com 3 degraus.<br>
-                    Cada degrau deve ter: 50 passos de comprimento e 30 passos de altura.
-                </p>
-                <div class="checkbox">
-                    <label class="checkbox-unico">
-                        <input type="checkbox">
-                        <span class="marcador"></span>
-                    </label>
-                </div>
-            </div>
-            <div class="desafios">
-                <p class="textoDesafio">Faça um desenho utilizando três formas geométricas simples<br>
 
-                    Um quadrado no lado esquerdo da tela.<br>
-                    Um triângulo no lado direito da tela.<br>
-                    Um hexagono no centro, entre o quadrado e o triângulo.<br>
-
-                    As três formas devem ficar separadas e formar uma composição organizada.</p>
-                <div class="checkbox">
-                    <label class="checkbox-unico">
-                        <input type="checkbox">
-                        <span class="marcador"></span>
-                    </label>
-                </div>
-            </div>
-            <div class="desafios">
-                <p class="textoDesafio">Faça a tartaruga desenhar a primeira letra do seu nome.<br>
-
-                    Desafio extra:<br>
-
-                    A letra deve ser formada apenas por linhas retas.<br>
-                    Tente fazer a letra com o menor número possível de movimentos.<br></p>
-                <div class="checkbox">
-                    <label class="checkbox-unico">
-                        <input type="checkbox">
-                        <span class="marcador"></span>
-                    </label>
-                </div>
-            </div>
-            <div class="desafios">
-                <p class="textoDesafio">Faça um desenho ou forma da sua escolha<br>
-
-                    Esse é o desafio final, use sua imaginação e utilizando o que você aprendeu, utilize a tartaruga
-                    para fazer algo da sua escolha</p>
-                <div class="checkbox">
-                    <label class="checkbox-unico">
-                        <input type="checkbox">
-                        <span class="marcador"></span>
-                    </label>
-                </div>
+            <div id="telaFinal" class="challenge-shell hidden">
+                <div id="resumoFinal" class="resultado-panel final-panel"></div>
             </div>
         </div>
         
@@ -204,9 +172,12 @@
     </div>
     <script src="js/ranking-system.js"></script>
     <script src="js/save-progress.js"></script>
+    <script src="js/challenge-mode.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        window.rankingSystem.updateRankingDisplay();
+        if (window.rankingSystem) {
+          window.rankingSystem.updateRankingDisplay();
+        }
       });
     </script>
 </body>

@@ -35,9 +35,17 @@
     speedRunner: {
       id: 'speedRunner',
       name: 'Speed Runner',
-      description: 'Complete todos os desafios em menos de 5 minutos',
+      description: 'Complete todos os desafios em menos de 8 minutos no total',
       icon: '⚡🏃',
-      condition: (completedCount, timeMs) => completedCount >= 5 && timeMs < 5 * 60 * 1000,
+      condition: (completedCount, timeMs, daysSaved, challengeTimes = []) => {
+        const hasAllChallenges = completedCount >= TOTAL_CHALLENGES;
+        const totalTime = Array.isArray(challengeTimes)
+          ? challengeTimes
+              .filter((challengeTime) => typeof challengeTime === 'number')
+              .reduce((sum, challengeTime) => sum + challengeTime, 0)
+          : 0;
+        return hasAllChallenges && totalTime > 0 && totalTime < 8 * 60 * 1000;
+      },
       reward: 150
     },
   };
@@ -68,12 +76,30 @@
     return initRanking();
   }
 
+  function computePoints(ranking) {
+    const hasSpeedRunner = ranking.badges.includes(BADGES.speedRunner.id);
+    return ranking.totalChallengesCompleted * POINTS_PER_CHALLENGE
+      + (hasSpeedRunner ? BADGES.speedRunner.reward : 0);
+  }
+
+  function setChallengeTimes(times) {
+    const ranking = initRanking();
+    ranking.challengeTimes = Array.isArray(times)
+      ? times.slice(0, TOTAL_CHALLENGES).map((time) => Number.isFinite(time) ? Number(time) : null)
+      : [];
+    ranking.totalChallengesCompleted = ranking.challengeTimes.filter((time) => typeof time === 'number').length;
+    ranking.lastUpdate = Date.now();
+    checkBadges(ranking);
+    return ranking;
+  }
+
   function updatePoints(challengesCompleted) {
     const ranking = initRanking();
-    ranking.points = challengesCompleted * POINTS_PER_CHALLENGE;
-    ranking.totalChallengesCompleted = challengesCompleted;
+    const completedCount = Number.isFinite(challengesCompleted)
+      ? Math.max(challengesCompleted, ranking.challengeTimes.filter((time) => typeof time === 'number').length)
+      : ranking.challengeTimes.filter((time) => typeof time === 'number').length;
+    ranking.totalChallengesCompleted = completedCount;
     ranking.lastUpdate = Date.now();
-    saveRanking(ranking);
     checkBadges(ranking);
     return ranking;
   }
@@ -85,17 +111,15 @@
 
     Object.values(BADGES).forEach(badge => {
       const hasBadge = ranking.badges.includes(badge.id);
-      const earnedBadge = badge.condition(completedCount, timeMs, daysSaved);
+      const earnedBadge = badge.condition(completedCount, timeMs, daysSaved, ranking.challengeTimes || []);
 
       if (earnedBadge && !hasBadge) {
         ranking.badges.push(badge.id);
-        if (badge.id == "speedRunner") {
-            ranking.points += badge.reward;
-        };
         showBadgeNotification(badge);
       }
     });
 
+    ranking.points = computePoints(ranking);
     saveRanking(ranking);
   }
 
@@ -171,6 +195,7 @@
   window.rankingSystem = {
     getRankingData,
     updatePoints,
+    setChallengeTimes,
     checkBadges,
     getEarnedBadges,
     getAllBadges,

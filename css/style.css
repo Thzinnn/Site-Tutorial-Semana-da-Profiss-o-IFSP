@@ -341,9 +341,125 @@ h2 {
     line-height: 1.4;
 }
 
+.hidden {
+    display: none !important;
+}
+
 p {
     font-family: var(--font-body);
     font-size: 0.95rem;
+}
+
+.challenge-shell {
+    width: min(100%, 900px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.challenge-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 110px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px 30px;
+    gap: 20px;
+    box-shadow: var(--shadow-card);
+}
+
+#indiceDesafio {
+    width: 100%;
+    text-align: left;
+    font-family: var(--font-heading);
+    color: var(--primary-green-hover);
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.btn-desafio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    padding: 0.9rem 1.5rem;
+    border: 1px solid var(--primary-green);
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(5, 150, 105, 0.2));
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.28);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-desafio:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary-green-hover);
+    box-shadow: 0 0 22px rgba(52, 211, 153, 0.45);
+}
+
+.challenge-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+}
+
+#cronometro {
+    font-family: var(--font-mono);
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--primary-green-hover);
+    text-shadow: 0 0 18px rgba(52, 211, 153, 0.5);
+    letter-spacing: 0.08em;
+}
+
+.resultado-panel {
+    width: min(100%, 420px);
+    border: 1px solid rgba(52, 211, 153, 0.5);
+    background: rgba(16, 185, 129, 0.08);
+    border-radius: 16px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 0 18px rgba(16, 185, 129, 0.12);
+}
+
+.resultado-label {
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+#ultimoTempoTexto {
+    font-size: 1.6rem;
+    font-family: var(--font-mono);
+    color: var(--primary-green-hover);
+}
+
+.final-panel {
+    align-items: center;
+    text-align: center;
+    padding: 32px 24px;
+}
+
+.final-panel h2 {
+    font-family: var(--font-heading);
+    color: var(--primary-green-hover);
+    margin-bottom: 10px;
+}
+
+.final-panel p {
+    color: var(--text-secondary);
 }
 
 /* ==========================================================================
