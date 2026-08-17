@@ -187,7 +187,7 @@
         .join('');
       
       if (earnedBadges.length === 0) {
-        badgesContainer.innerHTML = '<p class="no-badges">Ganhe badges completando desafios!</p>';
+        badgesContainer.innerHTML = '<p class="no-badges">Ganhe conquistas completando desafios!</p>';
       }
     }
   }
