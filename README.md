@@ -58,6 +58,13 @@ Este site foi desenvolvido para a **Feira de Profissões do IFSP Caraguatatuba**
 - Animações suaves
 - Feedback visual em tempo real
 
+### 🏅 Certificado Automático
+- Ao concluir os desafios, o usuário visualiza um painel final de congratulação
+- Há um botão de acesso ao formulário de emissão de certificado
+- O fluxo leva para um formulário automatizado, onde o participante informa o e-mail
+- O certificado é enviado diretamente para o endereço informado no formulário
+- A ação é aberta em nova aba para facilitar o preenchimento e o recebimento do comprovante
+
 ---
 
 ## 🏗️ Estrutura Técnica
@@ -92,7 +99,9 @@ Site-Tutorial-Semana-da-Profissão-IFSP/
 4. Implemente cada desafio no **Super Logo**
 5. Marque o checkbox quando concluir
 6. Ganhe pontos e badges automaticamente
-7. Divirta-se aprendendo a programar!
+7. Ao finalizar, acesse o painel de conclusão e clique em **Pegar Certificado**
+8. O botão leva para um **formulário automatizado**, onde é possível informar o e-mail e receber o certificado diretamente nele
+9. Divirta-se aprendendo a programar!
 
 ---
 
@@ -124,6 +133,7 @@ Site-Tutorial-Semana-da-Profissão-IFSP/
 | Botão | Função |
 |-------|--------|
 | 🗑️ **Limpar Progresso** | Reseta todos os desafios e pontos |
+| 📋 **Pegar Certificado** | Abre o formulário automatizado e envia o certificado diretamente para o e-mail informado |
 
 ---
 
