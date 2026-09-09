@@ -68,13 +68,6 @@ Este site foi desenvolvido para a **Feira de Profissões do IFSP Caraguatatuba**
 - Validação simples de estados persistidos antes da reutilização
 - Remoção de eventos inline para manter o HTML mais limpo e seguro
 
-### 🏅 Certificado Automático
-- Ao concluir os desafios, o usuário visualiza um painel final de congratulação
-- Há um botão de acesso ao formulário de emissão de certificado
-- O fluxo leva para um formulário automatizado, onde o participante informa o e-mail
-- O certificado é enviado diretamente para o endereço informado no formulário
-- A ação é aberta em nova aba para facilitar o preenchimento e o recebimento do comprovante
-
 ---
 
 ## 🏗️ Estrutura Técnica
