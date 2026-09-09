@@ -931,12 +931,6 @@ p {
         font-size: 2rem;
     }
 
-    #reset-ranking {
-        margin-left: 8px;
-        padding: 8px 12px;
-        font-size: 0.9rem;
-    }
-
     .badge-notification {
         max-width: 280px;
         left: 10px;

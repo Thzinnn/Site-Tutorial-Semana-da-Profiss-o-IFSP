@@ -6,6 +6,34 @@
   const TOTAL_CHALLENGES = 5;
   const MAX_POINTS = POINTS_PER_CHALLENGE * TOTAL_CHALLENGES;
 
+  function safeJSONParse(raw) {
+    try {
+      return JSON.parse(raw);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function createDefaultRanking() {
+    return {
+      version: 1,
+      points: 0,
+      totalChallengesCompleted: 0,
+      badges: [],
+      startTime: Date.now(),
+      lastUpdate: Date.now(),
+      challengeTimes: []
+    };
+  }
+
+  function normalizeChallengeTimes(times) {
+    if (!Array.isArray(times)) {
+      return [];
+    }
+
+    return times.slice(0, TOTAL_CHALLENGES).map((time) => Number.isFinite(time) ? Number(time) : null);
+  }
+
   const BADGES = {
     iniciante: {
       id: 'iniciante',
@@ -51,25 +79,54 @@
   };
 
   function initRanking() {
-    const saved = localStorage.getItem(RANKING_STORAGE_KEY);
-    if (!saved) {
-      const newRanking = {
+    try {
+      const saved = localStorage.getItem(RANKING_STORAGE_KEY);
+
+      if (!saved) {
+        const newRanking = createDefaultRanking();
+        localStorage.setItem(RANKING_STORAGE_KEY, JSON.stringify(newRanking));
+        return newRanking;
+      }
+
+      const parsed = safeJSONParse(saved);
+      if (!parsed || typeof parsed !== 'object') {
+        throw new Error('Ranking inválido no localStorage');
+      }
+
+      const normalizedRanking = {
         version: 1,
-        points: 0,
-        totalChallengesCompleted: 0,
-        badges: [],
-        startTime: Date.now(),
-        lastUpdate: Date.now(),
-        challengeTimes: []
+        points: Number.isFinite(parsed.points) ? Number(parsed.points) : 0,
+        totalChallengesCompleted: Number.isFinite(parsed.totalChallengesCompleted) ? Number(parsed.totalChallengesCompleted) : 0,
+        badges: Array.isArray(parsed.badges) ? parsed.badges.filter(Boolean) : [],
+        startTime: Number.isFinite(parsed.startTime) ? Number(parsed.startTime) : Date.now(),
+        lastUpdate: Number.isFinite(parsed.lastUpdate) ? Number(parsed.lastUpdate) : Date.now(),
+        challengeTimes: normalizeChallengeTimes(parsed.challengeTimes)
       };
-      localStorage.setItem(RANKING_STORAGE_KEY, JSON.stringify(newRanking));
-      return newRanking;
+
+      localStorage.setItem(RANKING_STORAGE_KEY, JSON.stringify(normalizedRanking));
+      return normalizedRanking;
+    } catch (error) {
+      console.warn('ranking-system: falha ao carregar ranking, resetando dados.', error);
+      const fallbackRanking = createDefaultRanking();
+      try {
+        localStorage.setItem(RANKING_STORAGE_KEY, JSON.stringify(fallbackRanking));
+      } catch (storageError) {
+        console.warn('ranking-system: não foi possível restaurar ranking no localStorage.', storageError);
+      }
+      return fallbackRanking;
     }
-    return JSON.parse(saved);
   }
 
   function saveRanking(data) {
-    localStorage.setItem(RANKING_STORAGE_KEY, JSON.stringify(data));
+    if (!data || typeof data !== 'object') {
+      return;
+    }
+
+    try {
+      localStorage.setItem(RANKING_STORAGE_KEY, JSON.stringify(data));
+    } catch (error) {
+      console.warn('ranking-system: não foi possível salvar ranking no localStorage.', error);
+    }
   }
 
   function getRankingData() {
@@ -98,6 +155,8 @@
     const completedCount = Number.isFinite(challengesCompleted)
       ? Math.max(challengesCompleted, ranking.challengeTimes.filter((time) => typeof time === 'number').length)
       : ranking.challengeTimes.filter((time) => typeof time === 'number').length;
+
+    ranking.challengeTimes = normalizeChallengeTimes(ranking.challengeTimes);
     ranking.totalChallengesCompleted = completedCount;
     ranking.lastUpdate = Date.now();
     checkBadges(ranking);
@@ -126,16 +185,30 @@
   function showBadgeNotification(badge) {
     const notification = document.createElement('div');
     notification.className = 'badge-notification';
-    notification.innerHTML = `
-      <div class="badge-notification-content">
-        <span class="badge-icon">${badge.icon}</span>
-        <div class="badge-text">
-          <strong>Nova Badge!</strong>
-          <p>${badge.name}: ${badge.description}</p>
-          <span class="badge-reward">+${badge.reward} pontos!</span>
-        </div>
-      </div>
-    `;
+
+    const content = document.createElement('div');
+    content.className = 'badge-notification-content';
+
+    const icon = document.createElement('span');
+    icon.className = 'badge-icon';
+    icon.textContent = badge.icon;
+
+    const text = document.createElement('div');
+    text.className = 'badge-text';
+
+    const title = document.createElement('strong');
+    title.textContent = 'Nova Badge!';
+
+    const description = document.createElement('p');
+    description.textContent = `${badge.name}: ${badge.description}`;
+
+    const reward = document.createElement('span');
+    reward.className = 'badge-reward';
+    reward.textContent = `+${badge.reward} pontos!`;
+
+    text.append(title, description, reward);
+    content.append(icon, text);
+    notification.appendChild(content);
     document.body.appendChild(notification);
 
     setTimeout(() => {
@@ -162,7 +235,9 @@
   }
 
   function resetRanking() {
+    const defaultRanking = createDefaultRanking();
     localStorage.removeItem(RANKING_STORAGE_KEY);
+    localStorage.setItem(RANKING_STORAGE_KEY, JSON.stringify(defaultRanking));
     updateRankingDisplay();
   }
 
@@ -170,25 +245,40 @@
     const ranking = initRanking();
     const pointsValue = document.getElementById('points-value');
     const badgesContainer = document.getElementById('earned-badges');
-    
+
     if (pointsValue) {
       pointsValue.textContent = ranking.points;
     }
-    
+
     if (badgesContainer) {
+      badgesContainer.replaceChildren();
+
       const earnedBadges = getEarnedBadges();
-      badgesContainer.innerHTML = earnedBadges
-        .map(badge => `
-          <div class="badge-item-earned" title="${badge.description}">
-            <span class="badge-icon">${badge.icon}</span>
-            <span class="badge-name">${badge.name}</span>
-          </div>
-        `)
-        .join('');
-      
+
       if (earnedBadges.length === 0) {
-        badgesContainer.innerHTML = '<p class="no-badges">Ganhe conquistas completando desafios!</p>';
+        const emptyState = document.createElement('p');
+        emptyState.className = 'no-badges';
+        emptyState.textContent = 'Ganhe conquistas completando desafios!';
+        badgesContainer.appendChild(emptyState);
+        return;
       }
+
+      earnedBadges.forEach((badge) => {
+        const badgeItem = document.createElement('div');
+        badgeItem.className = 'badge-item-earned';
+        badgeItem.title = badge.description;
+
+        const icon = document.createElement('span');
+        icon.className = 'badge-icon';
+        icon.textContent = badge.icon;
+
+        const name = document.createElement('span');
+        name.className = 'badge-name';
+        name.textContent = badge.name;
+
+        badgeItem.append(icon, name);
+        badgesContainer.appendChild(badgeItem);
+      });
     }
   }
 

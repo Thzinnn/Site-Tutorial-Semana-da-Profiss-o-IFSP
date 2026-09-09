@@ -208,6 +208,18 @@
       return;
     }
 
+    const resetButton = document.getElementById('reset');
+    if (resetButton) {
+      resetButton.addEventListener('click', function handleResetButtonClick() {
+        if (typeof window.clearProgress === 'function') {
+          window.clearProgress();
+          return;
+        }
+
+        clearProgress();
+      });
+    }
+
     inputs.forEach((input) => {
       input.addEventListener('change', () => {
         if (!isResetting) {
@@ -215,7 +227,6 @@
         }
       });
     });
-
 
     window.saveProgress = saveProgress;
     window.restoreProgress = restoreProgress;

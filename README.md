@@ -58,6 +58,16 @@ Este site foi desenvolvido para a **Feira de Profissões do IFSP Caraguatatuba**
 - Animações suaves
 - Feedback visual em tempo real
 
+### � Publicação no GitHub Pages
+- O projeto foi estruturado para funcionar como um site estático
+- Basta publicar a pasta raiz no GitHub Pages
+- Verifique que os arquivos CSS, JS, imagem e HTML fiquem na estrutura correta
+
+### �🔒 Boas práticas aplicadas
+- Proteção defensiva na leitura e escrita de dados em `localStorage`
+- Validação simples de estados persistidos antes da reutilização
+- Remoção de eventos inline para manter o HTML mais limpo e seguro
+
 ### 🏅 Certificado Automático
 - Ao concluir os desafios, o usuário visualiza um painel final de congratulação
 - Há um botão de acesso ao formulário de emissão de certificado
@@ -69,17 +79,19 @@ Este site foi desenvolvido para a **Feira de Profissões do IFSP Caraguatatuba**
 
 ## 🏗️ Estrutura Técnica
 
-```
+```text
 Site-Tutorial-Semana-da-Profissão-IFSP/
 ├── index.html                      # Página principal
 ├── README.md                       # Este arquivo
 ├── css/
 │   └── style.css                  # Estilos responsivos
 ├── js/
-│   ├── save-progress.js           # Sistema de progresso
-│   └── ranking-system.js          # Sistema de ranking
-└── image/
-    └── Logo-IFSP.jfif            # Logo IFSP
+│   ├── challenge-mode.js           # Fluxo de desafios e cronômetro
+│   ├── ranking-system.js           # Sistema de pontos, badges e ranking
+│   └── save-progress.js            # Persistência de progresso no localStorage
+├── image/
+│   └── Logo-IFSP.png              # Logo IFSP
+└── .gitignore                     # Arquivos ignorados pelo Git
 ```
 
 ### Tecnologias

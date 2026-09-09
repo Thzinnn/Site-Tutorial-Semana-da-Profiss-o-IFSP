@@ -148,11 +148,18 @@
       .filter((time) => typeof time === 'number')
       .reduce((acc, time) => acc + time, 0);
 
-    fields.resumoFinal.innerHTML = `
-      <h2>Parabéns!</h2>
-      <p>Você concluiu ${total} de ${CHALLENGES.length} desafios.</p>
-      <p>Tempo total: ${formatarTempo(tempoTotal)}</p>
-    `;
+    fields.resumoFinal.replaceChildren();
+
+    const titulo = document.createElement('h2');
+    titulo.textContent = 'Parabéns!';
+
+    const mensagemConclusao = document.createElement('p');
+    mensagemConclusao.textContent = `Você concluiu ${total} de ${CHALLENGES.length} desafios.`;
+
+    const mensagemTempo = document.createElement('p');
+    mensagemTempo.textContent = `Tempo total: ${formatarTempo(tempoTotal)}`;
+
+    fields.resumoFinal.append(titulo, mensagemConclusao, mensagemTempo);
 
     fields.telaFinal.classList.remove('hidden');
     fields.desafioAtual.classList.add('hidden');
